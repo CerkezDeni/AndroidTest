@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.ContextMenu
 import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -26,10 +23,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //Toast.makeText(applicationContext, "onCreate", Toast.LENGTH_SHORT).show()
         //Log.i("MyLog", "onCreate")
-        setContentView(R.layout.activity_main)
-
-        // Registrirajte textViewCounter za kontekstualni izbornik
-        registerForContextMenu(findViewById<TextView>(R.id.textViewCounter))
 
         val preferences = getPreferences(MODE_PRIVATE)
         counter = preferences.getInt("counter", 0)
@@ -41,10 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         val buttonUp = findViewById<Button>(R.id.buttonUp)
         val ime = findViewById<EditText>(R.id.plainTextName).text.toString()
-        buttonUp.setOnClickListener {
+        buttonUp.setOnClickListener{
             onButtonUp()
-            if (counter == 10) {
-                counter++
+            if(counter == 10){
+                counter ++
                 val intent = Intent(this, SuccesActivity::class.java)
                 intent.putExtra("ime", ime)
                 startActivity(intent)
@@ -53,13 +46,12 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
     fun onButtonUp() {
         counter++
         findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
 
         val ime = findViewById<EditText>(R.id.plainTextName).text.toString()
-        if (counter == 10) {
+        if(counter == 10){
             val intent = Intent(this, SuccesActivity::class.java)
             intent.putExtra("ime", ime)
             startActivity(intent)
@@ -67,20 +59,17 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
         }
     }
-
     override fun onStart() {
         super.onStart()
         //Toast.makeText(applicationContext, "onStart", Toast.LENGTH_SHORT).show()
         //Log.v("MyLog", "onStart")
     }
-
     override fun onResume() {
         super.onResume()
         //Toast.makeText(applicationContext, "onResume", Toast.LENGTH_SHORT).show()
         //Log.d("MyLog", "onResume")
 
     }
-
     override fun onPause() {
         super.onPause()
         //Toast.makeText(applicationContext, "onPause", Toast.LENGTH_SHORT).show()
@@ -91,13 +80,11 @@ class MainActivity : AppCompatActivity() {
         editor.putInt("counter", counter)
         editor.apply()
     }
-
     override fun onStop() {
         super.onStop()
         //Toast.makeText(applicationContext, "onStop", Toast.LENGTH_SHORT).show()
         //Log.e("MyLog", "onStop")
     }
-
     override fun onDestroy() {
         super.onDestroy()
         //Toast.makeText(applicationContext, "onDestroy", Toast.LENGTH_SHORT).show()
@@ -110,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("counter", counter)
 
     }
+    
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -119,63 +107,21 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.restore_counter -> {
-                // Handle the "Resetiraj" menu item click
-                onReset()
-                true
-            }
-
-            R.id.croatian -> {
-                // Handle the Croatian menu item click
-                // For example, change the language to Croatian
-                true
-            }
-
-            R.id.english -> {
-                // Handle the English menu item click
-                // For example, change the language to English
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-
-    fun onReset() {
-        counter = 0;
-        findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
-    }
-
     var counter = 0
     fun onButtonDown(view: View) {
-        if (counter > 0)
-            counter--
+        if(counter > 0)
+            counter --
         findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
 
     }
-
     fun onButtonUp(view: View) {
-        counter++
+        counter ++
         findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
     }
 
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_float, menu)
-    }
-
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_reset -> {
-                onReset()
-                true
-            }
-            else -> super.onContextItemSelected(item)
-        }
+    fun onReset(view: View){
+        counter = 0;
+        findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
     }
 
 
