@@ -11,21 +11,25 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
+        android:background="@drawable/running_abstract"
         >
 
         <TextView
             android:id="@+id/textViewCounter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?colorSecondary"
             android:gravity="center"
-            android:text="0" />
+            android:text="0"
+            android:textColor="?colorOnSecondary" />
 
         <Button
             android:id="@+id/buttonUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onButtonUp"
-            android:text="Up" />
+            android:text="Up"
+            />
 
         <Button
             android:id="@+id/buttonDown"
@@ -34,12 +38,21 @@
             android:onClick="onButtonDown"
             android:text="Down" />
 
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onReset"
+            android:text="Reset" />
+
         <EditText
             android:id="@+id/plainTextName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="Name" />
+            android:text="Name"
+            android:background="?colorSecondary"
+            android:textColor="?colorOnSecondary"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
