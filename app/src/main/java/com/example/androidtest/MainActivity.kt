@@ -1,22 +1,21 @@
 package com.example.androidtest
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,29 @@ class MainActivity : AppCompatActivity() {
                 counter = 0
             }
         }
+        setSupportActionBar(findViewById(R.id.my_toolbar))
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.restore_counter -> {
+                counter = 0;
+                findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
+                true
+            }
+            R.id.croatian-> {
+                changeLanguage(this, "hr")
+                recreate()
+                true
+            }
+            R.id.english-> {
+                changeLanguage(this, "en")
+                recreate()
+                true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
     fun onButtonUp() {
         counter++
@@ -97,7 +118,12 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("counter", counter)
 
     }
-    
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -124,5 +150,14 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
     }
 
-
+    @Suppress("DEPRECATION")
+    fun changeLanguage(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val res = context.resources
+        val config = Configuration(res.configuration)
+        config.setLocale(locale)
+        context.createConfigurationContext(config)
+        res.updateConfiguration(config, res.displayMetrics)
+    }
 }

@@ -9,7 +9,8 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/croatian"
-        android:title="Hrvatski" />
+        android:title="Hrvatski"
+        />
     <item
         android:id="@+id/english"
         android:title="Engleski" />

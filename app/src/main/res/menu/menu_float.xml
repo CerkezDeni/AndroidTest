@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_reset"
-        android:title="Reset to Zero"
+        android:title="@string/reset_to_zero"
         android:icon="@drawable/baseline_settings_backup_restore_24"
         app:showAsAction="ifRoom" />
 </menu>

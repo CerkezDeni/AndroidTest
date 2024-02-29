@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Fit Runner</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="reset">Reset</string>
+    <string name="name">Name</string>
+    <string name="success">You have succesfuly made 10 steps</string>
+    <string name="sendSMS">send SMS</string>
+    <string name="reset_to_zero">Reset to Zero</string>
 </resources>

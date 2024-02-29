@@ -9,16 +9,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="303dp" />
 
         <Button
             android:id="@+id/SMSbutton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pošalji SMS" />
+            android:text="@string/sendSMS" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="182dp">
+
+            <RadioButton
+                android:id="@+id/broj1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0911209205" />
+
+            <RadioButton
+                android:id="@+id/broj2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0959059874" />
+
+            <RadioButton
+                android:id="@+id/broj3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0913378982" />
+        </RadioGroup>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
