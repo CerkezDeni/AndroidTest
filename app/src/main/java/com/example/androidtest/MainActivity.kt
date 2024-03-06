@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -13,9 +14,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.example.androidtest.SuccessActivity
+import com.example.androidtest.data.User
+import com.example.androidtest.data.UserViewModel
+import java.time.LocalTime
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    var press = 0
+    private lateinit var mUserViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             onButtonUp()
             if(counter == 10){
                 counter ++
-                val intent = Intent(this, SuccesActivity::class.java)
+                val intent = Intent(this, SuccessActivity::class.java)
                 intent.putExtra("ime", ime)
                 startActivity(intent)
                 counter = 0
@@ -48,6 +56,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+
         when (item.itemId) {
             R.id.restore_counter -> {
                 counter = 0;
@@ -64,16 +75,42 @@ class MainActivity : AppCompatActivity() {
                 recreate()
                 true
             }
+            R.id.analytics ->{
+                val intent = Intent(this, AnalyticsActivity::class.java)
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun insertDataToDatabase() {
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        val name = findViewById<TextView>(R.id.plainTextName).text.toString()
+        val time = LocalTime.now()
+        val timeString = time.toString() // this stores the value of time
+        if(TextUtils.isEmpty(name)){
+            Log.e("Database", "User didn't enter its name")
+            Toast.makeText(applicationContext, "fmksfse", Toast.LENGTH_SHORT).show()
+        } else {
+            if (press < 10) {
+                Log.i("press","Pressed $press")
+            } else {
+                press -= 10
+                val user = User(0, name, timeString, counter)
+                mUserViewModel.addUser(user)
+            }
+        }
+    }
+
+
+
     fun onButtonUp() {
         counter++
         findViewById<TextView>(R.id.textViewCounter).text = counter.toString()
-
+        insertDataToDatabase()
         val ime = findViewById<EditText>(R.id.plainTextName).text.toString()
         if(counter == 10){
-            val intent = Intent(this, SuccesActivity::class.java)
+            val intent = Intent(this, SuccessActivity::class.java)
             intent.putExtra("ime", ime)
             startActivity(intent)
             counter = 0

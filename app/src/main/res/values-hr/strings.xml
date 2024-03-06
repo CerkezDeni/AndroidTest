@@ -8,4 +8,5 @@
     <string name="success">Uspješno ste napravili 10 koraka</string>
     <string name="sendSMS">pošalji SMS</string>
     <string name="reset_to_zero">Resetiraj na nulu</string>
+    <string name="successMessage">Uspjeh</string>
 </resources>

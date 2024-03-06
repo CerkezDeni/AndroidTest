@@ -14,4 +14,9 @@
     <item
         android:id="@+id/english"
         android:title="Engleski" />
+    <item
+        android:id="@+id/analytics"
+        android:title="Analytics"
+        android:icon="@drawable/baseline_123_24"
+        app:showAsAction="ifRoom"/>
 </menu>
