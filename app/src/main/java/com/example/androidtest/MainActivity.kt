@@ -54,11 +54,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.my_toolbar))
 
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-
-
         when (item.itemId) {
             R.id.restore_counter -> {
                 counter = 0;
@@ -82,7 +78,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
     private fun insertDataToDatabase() {
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         val name = findViewById<TextView>(R.id.plainTextName).text.toString()
@@ -94,16 +89,13 @@ class MainActivity : AppCompatActivity() {
         } else {
             if (press < 10) {
                 Log.i("press","Pressed $press")
-            } else {
-                press -= 10
+            } else if(press == 10) {
+                press = 0
                 val user = User(0, name, timeString, counter)
                 mUserViewModel.addUser(user)
             }
         }
     }
-
-
-
     fun onButtonUp() {
         counter++
         findViewById<TextView>(R.id.textViewCounter).text = counter.toString()

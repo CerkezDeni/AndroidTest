@@ -20,7 +20,7 @@ class SuccessActivity : AppCompatActivity() {
 
         val textViewSuccess = findViewById<TextView>(R.id.successText)
         val button = findViewById<Button>(R.id.buttonIntent)
-        val ime = intent.getStringExtra("name")
+        val ime = intent.getStringExtra("ime")
         val successMessage = getString(R.string.successMessage)
 
         textViewSuccess.text = "$ime, $successMessage"
